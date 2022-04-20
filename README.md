@@ -13,52 +13,52 @@ Weather API: Open Weather Map API
 
 1) Planning: 
   First sprint (1st Team Deliverable):  
-    - Create a paper prototype 
-    - Create user questions about project 
-    - Present to users the paper prototype and gather data from their input 
-    - Make changes to overall paper prototype 
-    - Present to users the new prototype and gather information 
-    Result: Final Paper Prototype for project 
+  - Create a paper prototype 
+  - Create user questions about project 
+  - Present to users the paper prototype and gather data from their input 
+  - Make changes to overall paper prototype 
+  - Present to users the new prototype and gather information 
+  - Result: Final Paper Prototype for project 
 
   Second Sprint (2nd Team Deliverable): 
-    - Start developing code for prototype 
-    - Choose platform for project (phone, computer, tablet)  
-    - Think about design 
-    Result: Start project development (ex. use terminal to find data from API) 
+  - Start developing code for prototype 
+  - Choose platform for project (phone, computer, tablet)  
+  - Think about design 
+  - Result: Start project development (ex. use terminal to find data from API) 
 
   Third Sprint (3rd Team Deliverable): 
-    - Record a video describing project progress
+  - Record a video describing project progress
     - Keep track of team documents 
     - Keep track of team’s code 
     - Show project progress with code 
     - Reveal what source is keeping track of version control (ex. GitHub) 
-    - Start planning for Quality Assurance 
+  - Start planning for Quality Assurance 
     - Testing 
     - Verification 
     - Validation 
-    Result: Working code and video about project progress and documentation, organization, and individual contributions). Develop plans for Quality Insurance. 
+  - Result: Working code and video about project progress and documentation, organization, and individual contributions). Develop plans for Quality Insurance. 
 
   Fourth Sprint (4th Team Deliverable): 
-    - Develop code module: 
+  - Develop code module: 
     - Uses API to update data for a cycle time 
     - Able to show the changes of values (from API) on our module (interface) 
-      *** ASK ABOUT SWAP MODULES WITH ANOTHER TEAM 
-    Result: Working module that interacts with API and updates in the background 		(retrieves data automatically using time cycle) 
+    - *** ASK ABOUT SWAP MODULES WITH ANOTHER TEAM 
+    - Result: Working module that interacts with API and updates in the background 		(retrieves data automatically using time cycle) 
 
   Fifth Sprint (5th Team Deliverable): 
-    - Demonstrate the interface (video) 
-    - Show documented results of Quality Assurance (testing, validation, verification) 
+  - Demonstrate the interface (video) 
+  - Show documented results of Quality Assurance (testing, validation, verification) 
     - Create test cases 
-        - Array with different numbers for temperature, for loop that goes through every number with specific time interval (5 seconds) 
-        - Could use a random number generator every five seconds to change interface 
+    - Array with different numbers for temperature, for loop that goes through every number with specific time interval (5 seconds) 
+    - Could use a random number generator every five seconds to change interface
     - Screen record the window 
-    Result: Documentation of project and version control. Want quality assurance tests and record these results. 
+    - Result: Documentation of project and version control. Want quality assurance tests and record these results. 
 
   Sixth Sprint (6th Team Deliverable): 
-   - Create a video demonstrating the main interface we developed 
-   - Java App 
-   - Develop another interface??? Smaller interface (phone) 
-   Result: A fully functional java application of our project. Develop another interface??? 
+  - Create a video demonstrating the main interface we developed \
+  - Java App 
+  - Develop another interface??? Smaller interface (phone) 
+  - Result: A fully functional java application of our project. Develop another interface??? 
 
 ///////////////////////////////////////////////////////////////////////////////
 
