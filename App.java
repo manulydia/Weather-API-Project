@@ -1,4 +1,3 @@
-//import java.beans.Visibility;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,32 +6,18 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-//import java.lang.reflect.Array;
 import java.net.MalformedURLException;
-
 import java.net.URL;
 import java.net.URLConnection;
-//import java.nio.file.Files;
-//import java.nio.file.Paths;
-//import java.text.ParseException;
 import java.util.HashMap;
-//import java.util.Map;
 import java.util.Map;
-
-//import javax.tools.FileObject;
-
-//import org.json.simple.JSONArray;
-//import org.json.simple.JSONObject;
-//import org.json.simple.parser.JSONParser;
-
 import com.google.gson.*;
 import com.google.gson.reflect.*;
 
+//https://code.google.com/archive/p/json-simple/downloads
+//https://search.maven.org/artifact/com.google.code.gson/gson/2.8.6/jar
 
-
-//import java.lang.Thread;
-
-    /*
+/*
     while(on app) {
         Get location from user
         send request to weather API 
@@ -43,10 +28,8 @@ import com.google.gson.reflect.*;
         Clear data.json
         program.sleep()
     }
-    */
+*/
 
-    //https://code.google.com/archive/p/json-simple/downloads
-    //https://search.maven.org/artifact/com.google.code.gson/gson/2.8.6/jar
 
 public class App {
 
@@ -140,16 +123,11 @@ public class App {
     }
         
 
-    public static void main(String[] args) throws Exception {        
+    public static HashMap<String, String> main(String LOCATION) throws Exception {        
         
         String FILE_NAME = "data.json";
-        String LOCATION = "New York";
 
-        Boolean AppIsOn = true;
-
-        System.out.println("Hello");
         
-        while(AppIsOn) {
             String data = getDataFromAPI(LOCATION);
             
             writeToJSON(FILE_NAME, data);
@@ -161,19 +139,19 @@ public class App {
             Map<String, Object> mainMap = jsonToMap(restMap.get("main").toString());
             Map<String, Object> windMap = jsonToMap(restMap.get("wind").toString());
             Map<String, Object> sysMap = jsonToMap(restMap.get("sys").toString());
-        
 
-            System.out.println("Current Temperature: " + mainMap.get("temp"));
-            System.out.println("Wind Speed: " + windMap.get("speed"));
-            System.out.println("Degree: " + windMap.get("deg"));
-            System.out.println("Main: " + mainWeatherInfoHashMap.get("main"));    
-            System.out.println("Description: " + mainWeatherInfoHashMap.get("description"));
-            System.out.println("icon: " + mainWeatherInfoHashMap.get("icon"));
-            System.out.println("UNIX Time Stamp: " + mainWeatherInfoHashMap.get("unixTimeStamp"));
-            System.out.println("-------------------------------------");
+            mainWeatherInfoHashMap.put("main", mainMap.get("temp").toString());
+            mainWeatherInfoHashMap.put("FeelsLike", mainMap.get("feels_like").toString());
+            mainWeatherInfoHashMap.put("minTemp", mainMap.get("temp_min").toString());
+            mainWeatherInfoHashMap.put("maxTemp", mainMap.get("temp_max").toString());
+            mainWeatherInfoHashMap.put("pressure", mainMap.get("pressure").toString());
+            mainWeatherInfoHashMap.put("humidity", mainMap.get("humidity").toString());
             
-            Thread.sleep(5000);
-        }        
+            mainWeatherInfoHashMap.put("windSpeed", windMap.get("speed").toString());
+            mainWeatherInfoHashMap.put("windDegree", windMap.get("deg").toString());
+            
+            mainWeatherInfoHashMap.put("country", sysMap.get("country").toString());      
+
+        return mainWeatherInfoHashMap;                   
     }
 }
-
