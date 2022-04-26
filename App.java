@@ -96,7 +96,7 @@ public class App {
             String unixTimeStamp = fileObject.get("dt").getAsString();
 
             HM.put("visibility", visibility);
-            HM.put("name", cityName);
+            HM.put("cityName", cityName);
             HM.put("unixTimeStamp", unixTimeStamp);
 
             //Get elements from array of objects in JSON from "weather" section
@@ -111,7 +111,7 @@ public class App {
                 String icon = weatherJsonObject.get("icon").getAsString();
 
                 HM.put("id", cityId);
-                HM.put("main", main);
+                HM.put("mainDescription", main);
                 HM.put("description", description);
                 HM.put("icon", icon);
             }            
@@ -140,7 +140,7 @@ public class App {
             Map<String, Object> windMap = jsonToMap(restMap.get("wind").toString());
             Map<String, Object> sysMap = jsonToMap(restMap.get("sys").toString());
 
-            mainWeatherInfoHashMap.put("main", mainMap.get("temp").toString());
+            mainWeatherInfoHashMap.put("temperature", mainMap.get("temp").toString());
             mainWeatherInfoHashMap.put("FeelsLike", mainMap.get("feels_like").toString());
             mainWeatherInfoHashMap.put("minTemp", mainMap.get("temp_min").toString());
             mainWeatherInfoHashMap.put("maxTemp", mainMap.get("temp_max").toString());
