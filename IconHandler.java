@@ -1,4 +1,4 @@
-public class ImageHandler {
+public class IconHandler {
    
     public static String getImage(String icon) {
         switch(icon) {
