@@ -86,6 +86,9 @@ public class JavaFXweatherapp extends Application {
         Label airQ = new Label("AQ: Great");
         Label date = new Label("4/10/2022");
         
+        // Icon
+        Image icon = new Image("File:icons/01d.png");
+        
         // Buttons
         Button updatebtn = new Button();
             updatebtn.setText("update");
@@ -107,12 +110,13 @@ public class JavaFXweatherapp extends Application {
         GridPane.setConstraints(updatebtn, 1, 0);
         GridPane.setConstraints(expandbtn, 2, 0);
         GridPane.setConstraints(temperature, 0, 1);
+        GridPane.setConstraints(icon, 1, 1);
         GridPane.setConstraints(time, 2, 1);
         GridPane.setConstraints(airQ, 0, 2);
         GridPane.setConstraints(date, 2, 2);
         
         //add items to grid2 and set the scene
-        grid2.getChildren().addAll(locationName, updatebtn, expandbtn, temperature, time, airQ, date);
+        grid2.getChildren().addAll(locationName, updatebtn, expandbtn, temperature, icon, time, airQ, date);
         smallWindow.getChildren().addAll(grid2);
         scene2 = new Scene(smallWindow,  250, 100);
     }
