@@ -16,7 +16,7 @@ import com.google.gson.reflect.*;
 
 //https://code.google.com/archive/p/json-simple/downloads
 //https://search.maven.org/artifact/com.google.code.gson/gson/2.8.6/jar
-
+// test comment
 /*
     while(on app) {
         Get location from user
