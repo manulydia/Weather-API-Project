@@ -54,6 +54,10 @@ public class JavaFXweatherapp extends Application {
             btn1.setText("Search");
         
         // Button actions
+        btn1.setOnAction((ActionEvent event) -> {
+            window.setScene(scene2);
+            System.out.println("Switched screens");
+        });
         
         // GridPane constrains for layout
         GridPane.setConstraints(text1, 0, 0);
@@ -68,16 +72,78 @@ public class JavaFXweatherapp extends Application {
     
         
         
+        
+        /*
+        * LARGER WINDOW WITH MORE WEATHER INFORMATION
+        * This window displays lots of information from API
+        * This is not a cycle but a one time display of weather
+        * User can go back and search for a different city -- repeating process
+        * Or user can switch to smaller ambient screen
+        */
+        StackPane largeWindow = new StackPane();
+        GridPane grid2 = new GridPane();
+        grid2.setPadding(new Insets(10, 10, 10, 10)); //add padding for each cell
+        grid2.setVgap(8); //vertical padding
+        grid2.setHgap(8); //horizontal padding
+        
+        // Labels
+        Label locationLabel = new Label("City name here");
+        Label weatherTextLabel = new Label("Weather Info:");
+        Label mainWeatherLabel = new Label("Main weather description here");
+        Label weatherDescriptionLabel = new Label("description here");
+        Label temperatureLabel = new Label("temperature here");
+        Label humidityLabel = new Label("humidity here");
+        Label visibilityLabel = new Label("visibility here");
+        Label windDegreeLabel = new Label("wind degree here");
+        Label windSpeedLabel = new Label("wind speed here");
+        
+        // Buttons
+        Button btn2 = new Button("+");
+        Button search = new Button("Search");
+        
+        // Buttons action events
+        btn2.setOnAction((ActionEvent event) -> {
+            window.setScene(scene3);
+            System.out.println("Switched screens");
+        });
+        search.setOnAction((ActionEvent event) -> {
+            window.setScene(scene);
+            System.out.println("Switched screens");
+        });
+        
+        // GridPane constrains for layout (labelname, column, row)
+        GridPane.setConstraints(locationLabel, 0, 0);
+        GridPane.setConstraints(btn2, 1, 0);
+        GridPane.setConstraints(search, 2, 0);
+        GridPane.setConstraints(weatherTextLabel, 0, 1);
+        GridPane.setConstraints(mainWeatherLabel, 0, 2);
+        GridPane.setConstraints(weatherDescriptionLabel, 0, 3);
+        GridPane.setConstraints(temperatureLabel, 0, 4);
+        GridPane.setConstraints(humidityLabel, 0, 5);
+        GridPane.setConstraints(visibilityLabel, 0, 6);
+        GridPane.setConstraints(windDegreeLabel, 0, 7);
+        GridPane.setConstraints(windSpeedLabel, 0, 8);
+                          
+        
+        //add items to grid2 and set the scene
+        grid2.getChildren().addAll(locationLabel, btn2, search, weatherTextLabel, mainWeatherLabel, weatherDescriptionLabel, temperatureLabel,
+            humidityLabel, visibilityLabel, windDegreeLabel, windSpeedLabel );
+        largeWindow.getChildren().addAll(grid2);
+        scene2 = new Scene(largeWindow,  400, 400);
+        
+        
+        
+        
         /*
         * SMALL AMBIENT UPDATING WINDOW
         * Small weather window layout
         * Will display information from API thorugh constant updates
         */
         StackPane smallWindow = new StackPane();
-        GridPane grid2 = new GridPane();
-        grid2.setPadding(new Insets(10, 10, 10, 10)); //add padding for each cell
-        grid2.setVgap(8); //vertical padding
-        grid2.setHgap(8); //horizontal padding
+        GridPane grid3 = new GridPane();
+        grid3.setPadding(new Insets(10, 10, 10, 10)); //add padding for each cell
+        grid3.setVgap(8); //vertical padding
+        grid3.setHgap(8); //horizontal padding
     
         // Labels
         Label locationName = new Label("Fresno, CA");
@@ -100,10 +166,6 @@ public class JavaFXweatherapp extends Application {
             window.setScene(scene);
             System.out.println("Switched screens");
         });
-        btn1.setOnAction((ActionEvent event) -> {
-            window.setScene(scene2);
-            System.out.println("Switched screens");
-        });
         
         // Constraints
         GridPane.setConstraints(locationName, 0, 0);
@@ -116,9 +178,9 @@ public class JavaFXweatherapp extends Application {
         GridPane.setConstraints(date, 2, 2);
         
         //add items to grid2 and set the scene
-        grid2.getChildren().addAll(locationName, updatebtn, expandbtn, temperature, icon, time, airQ, date);
-        smallWindow.getChildren().addAll(grid2);
-        scene2 = new Scene(smallWindow,  250, 100);
+        grid3.getChildren().addAll(locationName, updatebtn, expandbtn, temperature, icon, time, airQ, date);
+        smallWindow.getChildren().addAll(grid3);
+        scene3 = new Scene(smallWindow,  250, 100);
     }
     
 
