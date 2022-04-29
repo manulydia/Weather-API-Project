@@ -53,12 +53,6 @@ public class JavaFXweatherapp extends Application {
         Button btn1 = new Button();
             btn1.setText("Search");
         
-        // Button actions
-        btn1.setOnAction((ActionEvent event) -> {
-            window.setScene(scene2);
-            System.out.println("Switched screens");
-        });
-        
         // GridPane constrains for layout
         GridPane.setConstraints(text1, 0, 0);
         GridPane.setConstraints(ulocation, 0, 1);
@@ -146,11 +140,11 @@ public class JavaFXweatherapp extends Application {
         grid3.setHgap(8); //horizontal padding
     
         // Labels
-        Label locationName = new Label("Fresno, CA");
-        Label temperature = new Label("72 F");
-        Label time = new Label("12:30");
-        Label airQ = new Label("AQ: Great");
-        Label date = new Label("4/10/2022");
+        Label locationName = new Label("City");
+        Label temperature = new Label("Temperature");
+        Label weather = new Label("Weather");
+        Label humid = new Label("Humidity");
+        Label wind = new Label("Wind Speed");
         
         // Icon
         Image icon = new Image("File:icons/01d.png");
@@ -177,10 +171,24 @@ public class JavaFXweatherapp extends Application {
         GridPane.setConstraints(airQ, 0, 2);
         GridPane.setConstraints(date, 2, 2);
         
-        //add items to grid2 and set the scene
+        //add items to grid3 and set the scene
         grid3.getChildren().addAll(locationName, updatebtn, expandbtn, temperature, icon, time, airQ, date);
         smallWindow.getChildren().addAll(grid3);
-        scene3 = new Scene(smallWindow,  250, 100);
+        scene3 = new Scene(smallWindow,  400, 150);
+        
+        
+        
+        // Button action for screen 1
+        btn1.setOnAction((ActionEvent event) -> {
+            window.setScene(scene2);
+            System.out.println("Switched screens");
+            displayHashLargeWindow(ulocation, locationLabel, mainWeatherLabel, weatherDescriptionLabel, temperatureLabel,
+                    humidityLabel, visibilityLabel, windDegreeLabel, windSpeedLabel);
+        });
+        // Button action for small window (currently only displays once)
+         updatebtn.setOnAction((ActionEvent event) -> {
+            displayFromHash(ulocation, locationName, temperature, weather, humid, wind);
+        });
     }
     
 
@@ -189,5 +197,44 @@ public class JavaFXweatherapp extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    /*
+    * DISPLAY INFO FOR SMALL WINDOW
+    * Method that takes the user input for city
+    * and displays the information from the API HashMap
+    */
+    public static void displayFromHash(TextField cityInput, Label location, Label temperature, Label weather, Label humid, Label wind){
+        String city;
+        city = cityInput.getText();
+        Location test = new Location(city);
+            HashMap<String, String> hm = test.getCityWeatherData();
+                location.setText(hm.get("name"));
+                temperature.setText("temp: " + hm.get("temperature") + " F");
+                weather.setText("weather: " + hm.get("mainDescription"));
+                humid.setText("humidity: " + hm.get("humidity"));
+                wind.setText("wind: " + hm.get("windSpeed") + "mph");
+    }
+    
+    /*
+    * DSPLAY INFO FOR LARGER WINDOW
+    * Takes user input for city and displays information
+    * ONLY DISPLAYS ONCE
+    */
+    public static void displayHashLargeWindow(TextField cityInput, Label location, Label mainWeather, Label weatherDescription,
+        Label temperature, Label humidity, Label visibility, Label windDegree, Label windSpeed){
+            String city;
+            city = cityInput.getText();
+            Location test = new Location(city);
+            
+            HashMap<String, String> hm = test.getCityWeatherData();
+                location.setText(hm.get("name"));
+                mainWeather.setText("weather: " + hm.get("mainDescription"));
+                weatherDescription.setText("description: " + hm.get("description"));
+                temperature.setText("temp: " + hm.get("temperature") + " F");
+                humidity.setText("humidity: " + hm.get("humidity"));
+                visibility.setText("visibility: " + hm.get("visibility"));
+                windDegree.setText("wind degree: " + hm.get("windDegree"));
+                windSpeed.setText("wind speed: " + hm.get("windSpeed") + "mph");
     }
 }
