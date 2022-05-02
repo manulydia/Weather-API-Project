@@ -1,4 +1,4 @@
-package javafxweatherapp;
+package weather_api_project;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -16,7 +16,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.scene.text.Font;
+
 
 /*
 * @author Lydia, Michael, Vini
@@ -31,6 +34,12 @@ public class JavaFXweatherapp extends Application {
         window = primaryStage;
         window.setTitle("Weather App");
         
+        /* FORMATTING OF TEXTS/LABELS
+        * This code will apply different fonts, bolding, and font size to text
+        */
+        Font font = Font.font("Arial", FontWeight.BOLD,40);
+        Font font2 = Font.font("Arial", 25);
+        
         /*
         * SEARCH CITY WINDOW FOR USER INPUT
         * This is the first opening window
@@ -42,8 +51,10 @@ public class JavaFXweatherapp extends Application {
         grid1.setVgap(8); //vertical padding
         grid1.setHgap(8); //horizontal padding
         
-        // Labels
+        // Labels w/ formatting
         Label text1 = new Label("Enter Location:");
+        
+        text1.setFont(font);
         
         // Textfields
         TextField ulocation = new TextField();
@@ -80,7 +91,7 @@ public class JavaFXweatherapp extends Application {
         grid2.setVgap(8); //vertical padding
         grid2.setHgap(8); //horizontal padding
         
-        // Labels
+        // Labels w/ formatting
         Label locationLabel = new Label("City name here");
         Label weatherTextLabel = new Label("Weather Info:");
         Label mainWeatherLabel = new Label("Main weather description here");
@@ -90,6 +101,16 @@ public class JavaFXweatherapp extends Application {
         Label visibilityLabel = new Label("visibility here");
         Label windDegreeLabel = new Label("wind degree here");
         Label windSpeedLabel = new Label("wind speed here");
+        
+        locationLabel.setFont(font2);
+        weatherTextLabel.setFont(font2);
+        mainWeatherLabel.setFont(font2);
+        weatherDescriptionLabel.setFont(font2);
+        temperatureLabel.setFont(font2);
+        humidityLabel.setFont(font2);
+        visibilityLabel.setFont(font2);
+        windDegreeLabel.setFont(font2);
+        windSpeedLabel.setFont(font2);
         
         // Buttons
         Button btn2 = new Button("+");
@@ -139,12 +160,18 @@ public class JavaFXweatherapp extends Application {
         grid3.setVgap(8); //vertical padding
         grid3.setHgap(8); //horizontal padding
     
-        // Labels
+        // Labels w/ formatting
         Label locationName = new Label("City");
         Label temperature = new Label("Temperature");
         Label weather = new Label("Weather");
         Label humid = new Label("Humidity");
         Label wind = new Label("Wind Speed");
+        
+        locationName.setFont(font);
+        temperature.setFont(font2);
+        weather.setFont(font2);
+        humid.setFont(font2);
+        wind.setFont(font2);
         
         // Icon
         Image icon = new Image("File:icons/01d.png");
