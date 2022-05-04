@@ -2,8 +2,13 @@ package weather_api_project;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,29 +21,27 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import javafx.scene.text.Font;
+import javafx.util.Duration;
 
-
-/*
-* @author Lydia, Michael, Vini
-*/
+/**
+ *
+ * @author Lydia, Michael, Vini
+ */
 public class JavaFXweatherapp extends Application {
     Stage window;
-    Scene scene, scene2;
+    Scene scene, scene2, scene3;
     static Thread tr = new Thread();
+    
+    //for testing
+    int i = 0;
     
     @Override
     public void start(Stage primaryStage) {
         window = primaryStage;
         window.setTitle("Weather App");
-        
-        /* FORMATTING OF TEXTS/LABELS
-        * This code will apply different fonts, bolding, and font size to text
-        */
-        Font font = Font.font("Arial", FontWeight.BOLD,40);
-        Font font2 = Font.font("Arial", 25);
         
         /*
         * SEARCH CITY WINDOW FOR USER INPUT
@@ -51,10 +54,9 @@ public class JavaFXweatherapp extends Application {
         grid1.setVgap(8); //vertical padding
         grid1.setHgap(8); //horizontal padding
         
-        // Labels w/ formatting
-        Label text1 = new Label("Enter Location:");
-        
-        text1.setFont(font);
+        // Labels
+        Label text1 = new Label("Enter city name:");
+            text1.setFont(Font.font("Arial", FontWeight.BOLD,15));
         
         // Textfields
         TextField ulocation = new TextField();
@@ -77,7 +79,6 @@ public class JavaFXweatherapp extends Application {
     
         
         
-        
         /*
         * LARGER WINDOW WITH MORE WEATHER INFORMATION
         * This window displays lots of information from API
@@ -91,9 +92,12 @@ public class JavaFXweatherapp extends Application {
         grid2.setVgap(8); //vertical padding
         grid2.setHgap(8); //horizontal padding
         
-        // Labels w/ formatting
+        // Labels and fonts
         Label locationLabel = new Label("City name here");
+            locationLabel.setFont(Font.font("Arial", FontWeight.BOLD,30));
         Label weatherTextLabel = new Label("Weather Info:");
+            weatherTextLabel.setFont(Font.font("Arial", 20));
+        Label line = new Label("---------------------------------------");
         Label mainWeatherLabel = new Label("Main weather description here");
         Label weatherDescriptionLabel = new Label("description here");
         Label temperatureLabel = new Label("temperature here");
@@ -101,48 +105,32 @@ public class JavaFXweatherapp extends Application {
         Label visibilityLabel = new Label("visibility here");
         Label windDegreeLabel = new Label("wind degree here");
         Label windSpeedLabel = new Label("wind speed here");
-        
-        locationLabel.setFont(font2);
-        weatherTextLabel.setFont(font2);
-        mainWeatherLabel.setFont(font2);
-        weatherDescriptionLabel.setFont(font2);
-        temperatureLabel.setFont(font2);
-        humidityLabel.setFont(font2);
-        visibilityLabel.setFont(font2);
-        windDegreeLabel.setFont(font2);
-        windSpeedLabel.setFont(font2);
+        Label text = new Label("Set as Ambient Window?");
         
         // Buttons
-        Button btn2 = new Button("+");
+        Button btn2 = new Button("Set");
         Button search = new Button("Search");
-        
-        // Buttons action events
-        btn2.setOnAction((ActionEvent event) -> {
-            window.setScene(scene3);
-            System.out.println("Switched screens");
-        });
-        search.setOnAction((ActionEvent event) -> {
-            window.setScene(scene);
-            System.out.println("Switched screens");
-        });
         
         // GridPane constrains for layout (labelname, column, row)
         GridPane.setConstraints(locationLabel, 0, 0);
-        GridPane.setConstraints(btn2, 1, 0);
-        GridPane.setConstraints(search, 2, 0);
-        GridPane.setConstraints(weatherTextLabel, 0, 1);
-        GridPane.setConstraints(mainWeatherLabel, 0, 2);
-        GridPane.setConstraints(weatherDescriptionLabel, 0, 3);
-        GridPane.setConstraints(temperatureLabel, 0, 4);
-        GridPane.setConstraints(humidityLabel, 0, 5);
-        GridPane.setConstraints(visibilityLabel, 0, 6);
-        GridPane.setConstraints(windDegreeLabel, 0, 7);
-        GridPane.setConstraints(windSpeedLabel, 0, 8);
+        GridPane.setConstraints(search, 1, 0);
+        GridPane.setConstraints(line, 0, 1);
+        GridPane.setConstraints(weatherTextLabel, 0, 2);
+        GridPane.setConstraints(mainWeatherLabel, 0, 3);
+        GridPane.setConstraints(weatherDescriptionLabel, 0, 4);
+        GridPane.setConstraints(temperatureLabel, 0, 5);
+        GridPane.setConstraints(humidityLabel, 0, 6);
+        GridPane.setConstraints(visibilityLabel, 0, 7);
+        GridPane.setConstraints(windDegreeLabel, 0, 8);
+        GridPane.setConstraints(windSpeedLabel, 0, 9);
+        GridPane.setConstraints(text, 0, 10);
+        GridPane.setConstraints(btn2, 1, 10);
+
                           
         
         //add items to grid2 and set the scene
-        grid2.getChildren().addAll(locationLabel, btn2, search, weatherTextLabel, mainWeatherLabel, weatherDescriptionLabel, temperatureLabel,
-            humidityLabel, visibilityLabel, windDegreeLabel, windSpeedLabel );
+        grid2.getChildren().addAll(locationLabel, btn2, search, line, weatherTextLabel, mainWeatherLabel, weatherDescriptionLabel, temperatureLabel,
+            humidityLabel, visibilityLabel, windDegreeLabel, windSpeedLabel, text);
         largeWindow.getChildren().addAll(grid2);
         scene2 = new Scene(largeWindow,  400, 400);
         
@@ -160,51 +148,37 @@ public class JavaFXweatherapp extends Application {
         grid3.setVgap(8); //vertical padding
         grid3.setHgap(8); //horizontal padding
     
-        // Labels w/ formatting
+        // Labels
         Label locationName = new Label("City");
+            locationName.setFont(Font.font("Arial", FontWeight.BOLD,25));
         Label temperature = new Label("Temperature");
         Label weather = new Label("Weather");
         Label humid = new Label("Humidity");
         Label wind = new Label("Wind Speed");
-        
-        locationName.setFont(font);
-        temperature.setFont(font2);
-        weather.setFont(font2);
-        humid.setFont(font2);
-        wind.setFont(font2);
-        
-        // Icon
-        Image icon = new Image("File:icons/01d.png");
+        Label testing = new Label("Testing variable");
         
         // Buttons
-        Button updatebtn = new Button();
-            updatebtn.setText("update");
-        Button expandbtn = new Button();
-            expandbtn.setText("Go Back");
-        
-        // Button actions
-        expandbtn.setOnAction((ActionEvent event) -> {
-            window.setScene(scene);
-            System.out.println("Switched screens");
-        });
+        Button backbtn = new Button("Go Back");
+        Button updatebtn = new Button("Update");
         
         // Constraints
         GridPane.setConstraints(locationName, 0, 0);
         GridPane.setConstraints(updatebtn, 1, 0);
-        GridPane.setConstraints(expandbtn, 2, 0);
+        GridPane.setConstraints(backbtn, 2, 0);
         GridPane.setConstraints(temperature, 0, 1);
-        GridPane.setConstraints(icon, 1, 1);
-        GridPane.setConstraints(time, 2, 1);
-        GridPane.setConstraints(airQ, 0, 2);
-        GridPane.setConstraints(date, 2, 2);
+        GridPane.setConstraints(weather, 2, 1);
+        GridPane.setConstraints(humid, 0, 2);
+        GridPane.setConstraints(wind, 2, 2);
+        GridPane.setConstraints(testing, 3, 0);
+        
         
         //add items to grid3 and set the scene
-        grid3.getChildren().addAll(locationName, updatebtn, expandbtn, temperature, icon, time, airQ, date);
+        grid3.getChildren().addAll(locationName, updatebtn, backbtn, temperature, weather, humid, wind, testing);
         smallWindow.getChildren().addAll(grid3);
-        scene3 = new Scene(smallWindow,  400, 150);
-        
-        
-        
+        scene3 = new Scene(smallWindow, 400, 150);
+   
+    
+    
         // Button action for screen 1
         btn1.setOnAction((ActionEvent event) -> {
             window.setScene(scene2);
@@ -212,18 +186,56 @@ public class JavaFXweatherapp extends Application {
             displayHashLargeWindow(ulocation, locationLabel, mainWeatherLabel, weatherDescriptionLabel, temperatureLabel,
                     humidityLabel, visibilityLabel, windDegreeLabel, windSpeedLabel);
         });
-        // Button action for small window (currently only displays once)
-         updatebtn.setOnAction((ActionEvent event) -> {
-            displayFromHash(ulocation, locationName, temperature, weather, humid, wind);
+        
+        // Buttons action events for screen 2
+        btn2.setOnAction((ActionEvent event) -> {
+            window.setScene(scene3);
+            System.out.println("Switched screens");
         });
-    }
+        search.setOnAction((ActionEvent event) -> {
+            window.setScene(scene);
+            System.out.println("Switched screens");
+        });
+        
+        // Button action for small window
+        updatebtn.setOnAction((ActionEvent event) -> {
+            updateCounter(ulocation, locationName, temperature, weather, humid, wind, testing);
+        });
+        backbtn.setOnAction((ActionEvent event) -> {
+            window.setScene(scene);
+            System.out.println("Switched screens");
+        });
+
+    } // end of start
     
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
+       launch(args);
+    }
+    
+    
+    
+    
+    
+    // METHODS used throughout the code above // // // // // // // // // // // //
+
+    /*
+    * INFINITE LOOP THAT UPDATES
+    * Calls on displayFromHash
+    */
+    public void updateCounter(TextField userCity, Label location, Label temperature, Label weather, Label humid, Label wind, Label testing){
+        testing.setText(String.valueOf(i));
+        displayFromHash(userCity, location, temperature, weather, humid, wind);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(10), e -> {
+            i++;
+            testing.setText(String.valueOf(i));
+            displayFromHash(userCity, location, temperature, weather, humid, wind);
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
     }
     
     /*
@@ -240,7 +252,7 @@ public class JavaFXweatherapp extends Application {
                 temperature.setText("temp: " + hm.get("temperature") + " F");
                 weather.setText("weather: " + hm.get("mainDescription"));
                 humid.setText("humidity: " + hm.get("humidity"));
-                wind.setText("wind: " + hm.get("windSpeed") + "mph");
+                wind.setText("wind: " + hm.get("windSpeed") + " mph");
     }
     
     /*
@@ -262,6 +274,6 @@ public class JavaFXweatherapp extends Application {
                 humidity.setText("humidity: " + hm.get("humidity"));
                 visibility.setText("visibility: " + hm.get("visibility"));
                 windDegree.setText("wind degree: " + hm.get("windDegree"));
-                windSpeed.setText("wind speed: " + hm.get("windSpeed") + "mph");
+                windSpeed.setText("wind speed: " + hm.get("windSpeed") + " mph");
     }
 }
