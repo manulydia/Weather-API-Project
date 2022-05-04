@@ -5,6 +5,11 @@ Class: CSSE-350
 
 Team Project – Weather Window 
 
+PS.: Our project uses gson and junit external libraries. Make sure these two external jars are downloaded and added to the references library
+here are the links:
+  - https://search.maven.org/artifact/com.google.code.gson/gson/2.8.6/jar
+  - https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.7.0/
+
 General Project Idea: 
 
 For the ambient interface, we are planning to create a small window that provides information about the weather for a certain place location. This information will be updated after each specified time passes (ex. 10 minutes). The weather information will be based on real time events which will be retrieved from a weather API. There will also be a way to maximize the ambient interface to a bigger window for more information. 
