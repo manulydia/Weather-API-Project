@@ -48,7 +48,7 @@ public class Location {
     public String getDataFromAPI(String LOCATION){
         
         //creating Constant API_KEY and URL_STRING
-        String API_KEY = "5a0eb1ec7bae1494bd256e8b296423a2";
+        String API_KEY = "61801fa219f237e8d8118308535cc94e";
         String URL_STRING = "https://api.openweathermap.org/data/2.5/weather?q=" + LOCATION + "&appid=" + API_KEY+ "&units=imperial";
 
         //String builder object to append the lines of data provided my API in the web
